@@ -1,0 +1,15 @@
+.nav {
+    grid-area: n;
+    background-color: bisque;
+    padding: 30px 20px;
+  }
+  .item {
+    font-size: 150%; 
+  }
+  .item a {
+    text-decoration: none;
+  }
+  
+  .selected {
+    color: brown ;
+  }
