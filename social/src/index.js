@@ -3,10 +3,26 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import state from './redux/state';
+
+import store from './redux/store'
 // import {addPost} from './redux/state';
 //Moved to render.js
-import { rerenderEntire } from './redux/render';
+
+//for use state
+// import {addPost} from './redux/state';
+// import {changePostTextArea} from './redux/state';
+// import state, { subscribe } from './redux/state';
+import {BrowserRouter} from 'react-router-dom';
+
+export let rerenderEntires = () => {
+    ReactDOM.render(<BrowserRouter> 
+        {/* <App state={state} addPost={addPost} changePostTextArea={changePostTextArea}/> */}
+        {/* using store without state */}
+        <App state={store.getState()} addPost={store.addPost.bind(store)} changePostTextArea={store.changePostTextArea.bind(store)}/>
+
+    </BrowserRouter>, document.getElementById('root'));
+}
+
 // import { BrowserRouter } from 'react-router-dom';
 
 // ReactDOM.render(<App dataPost={dataPost} dialogData={dialogData} messagedata={messagedata}/>, document.getElementById('root'));
@@ -17,6 +33,9 @@ import { rerenderEntire } from './redux/render';
     //     <App state={state} addPost={addPost}/>
     // </BrowserRouter>, document.getElementById('root'));
 //}
-rerenderEntire(state);
+// rerenderEntires(state);
+rerenderEntires(store.getState());
+// debugger;
+store.subscribe(rerenderEntires);
 
 serviceWorker.unregister();

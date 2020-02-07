@@ -1,4 +1,7 @@
-import { rerenderEntire } from './render';
+// import { rerenderEntire } from './render';
+let rerenderEntire = () => {
+    console.log('State was changed');
+}
 let state = {
     profilePage : {
         dataPost : [
@@ -80,7 +83,7 @@ let state = {
 
 // }
 //add vvalue from changed state without params
-export let addPost = () => {
+export const addPost = () => {
     // debugger;
     let newPost = {
         id:5,
@@ -94,8 +97,8 @@ export let addPost = () => {
     
 
 }
-export let changePostTextArea = (text) => {
-    debugger;
+export const changePostTextArea = (text) => {
+    // debugger;
     state.profilePage.newTextPost = text;
     rerenderEntire(state);
 }
@@ -103,5 +106,10 @@ export let changePostTextArea = (text) => {
 //     state.profilePage.newTextPost = "";
 //     rerenderEntire(state);
 // }
+
+export const subscribe = (observer) => {
+    // debugger;
+    rerenderEntire = observer; //using pattern observer
+}
 
 export default state;
