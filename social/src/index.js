@@ -4,7 +4,8 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-import store from './redux/store'
+// import store from './redux/store';
+import store from './redux/redux-store';
 // import {addPost} from './redux/state';
 //Moved to render.js
 
@@ -15,10 +16,14 @@ import store from './redux/store'
 import {BrowserRouter} from 'react-router-dom';
 
 export let rerenderEntires = () => {
+    // debugger
     ReactDOM.render(<BrowserRouter> 
         {/* <App state={state} addPost={addPost} changePostTextArea={changePostTextArea}/> */}
         {/* using store without state */}
-        <App state={store.getState()} addPost={store.addPost.bind(store)} changePostTextArea={store.changePostTextArea.bind(store)}/>
+        {/* <App state={store.getState()} addPost={store.addPost.bind(store)} changePostTextArea={store.changePostTextArea.bind(store)}/> */}
+        {/* using dispatch in store.js */}
+        <App state={store.getState()} dispatch={store.dispatch.bind(store)} store={store}/>
+
 
     </BrowserRouter>, document.getElementById('root'));
 }
@@ -35,7 +40,9 @@ export let rerenderEntires = () => {
 //}
 // rerenderEntires(state);
 rerenderEntires(store.getState());
-// debugger;
+debugger;
+// store.subscribe(()=>{
+//     rerenderEntires(store.getState());
+// } );
 store.subscribe(rerenderEntires);
-
 serviceWorker.unregister();

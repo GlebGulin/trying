@@ -10,6 +10,7 @@ import { Route,  BrowserRouter } from 'react-router-dom';
 
 
 const App = (props) => {
+  debugger;
   return (
     // <BrowserRouter>
     <div className="wrapper">
@@ -19,12 +20,12 @@ const App = (props) => {
             {/* <Route path="/messages" component={Dialog} /> */}
             {/* <Route path="/messages" render={() => <Dialog dialogData={props.state.messagePage.dialogData} 
                     messagedata={props.state.messagePage.messagedata}/>} />   */}
-            <Route path="/messages" render={() => <Dialog state={props.state.messagePage}/>} />
+            <Route path="/messages" render={() => <Dialog state={props.state.messagePage} dispatch = {props.dispatch}/>} />
 
             {/* <Route path="/profile" render={() => <Profile dataPost={props.state.profilePage.dataPost}/>} /> */}
             <Route path="/profile" render={() => <Profile state={props.state.profilePage} 
-            addPost={props.addPost}
-            changePostTextArea={props.changePostTextArea}/>} />
+            // addPost={props.addPost} changePostTextArea={props.changePostTextArea}/>} 
+            dispatch = {props.dispatch} />}/>
 
             {/* <Route path="/profile" component={Profile} /> */}
             <Route path="/music" render={() => <Music />} />

@@ -1,3 +1,6 @@
+import ProfileReducer from './profile-reducer';
+import DialogReducer from './dialog-reducer';
+import SidebarReducer from './sidebar-reducer';
 //Create store instead state
 let store = {
     _state : {
@@ -62,39 +65,105 @@ let store = {
                     id:2,
                     mestext:"Call me, please!!!"
                 }
-            ]
+            ],
+            messageText: "Hallo, mein freund"
+        },
+        sidebar:{
+
         }
     },
     getState(){
-        debugger;
+        // debugger;
         return this._state;
     },
     _rerenderEntire() {
         console.log('State was changed');
     },
-    addPost() {
-        debugger;
-        let newPost = {
-            id:5,
+    // addPost() {
+    //     // debugger;
+    //     let newPost = {
+    //         id:5,
             
-            textpost:this._state.profilePage.newTextPost,
-            likecount:25
-        }
+    //         textpost:this._state.profilePage.newTextPost,
+    //         likecount:25
+    //     }
     
-        this._state.profilePage.dataPost.push(newPost);
-        this._state.profilePage.newTextPost = "";
-        this._rerenderEntire(this._state);
-    },
-    changePostTextArea(text){
+    //     this._state.profilePage.dataPost.push(newPost);
+    //     this._state.profilePage.newTextPost = "";
+    //     this._rerenderEntire(this._state);
+    // },
+    // changePostTextArea(text){
         
-        this._state.profilePage.newTextPost = text;
-        this._rerenderEntire(this._state);
-    },
+    //     this._state.profilePage.newTextPost = text;
+    //     this._rerenderEntire(this._state);
+    // },
     subscribe(observer){
         // debugger;
         this._rerenderEntire = observer; //using pattern observer
-    }
+    },
+    //!!!!Including dispatch
+    dispatch(action){
+
+        //after including of reducers we turn of dispatch 
+        ///////////////////////////////////////////
+        // if(action.type === "ADD-POST"){
+        //     let newPost = {
+        //         id:5,
+                
+        //         textpost:this._state.profilePage.newTextPost,
+        //         likecount:25
+        //     }
+        
+        //     this._state.profilePage.dataPost.push(newPost);
+        //     this._state.profilePage.newTextPost = "";
+        //     this._rerenderEntire(this._state);
+        // }
+        // else if (action.type === "CHANGE-POST-TEXT-AREA")
+        // {
+        //     this._state.profilePage.newTextPost = action.text;
+        //     this._rerenderEntire(this._state);
+        // }
+        // else if (action.type === "CHANGE-MESSAGE"){
+        //     this._state.messagePage.messageText = action.newMessage;
+        //     this._rerenderEntire(this._state);
+        // }
+        // else if (action.type === "ADD-MESSAGE")
+        // {
+        //     this._state.messagePage.messagedata.push({id: 3, mestext: this._state.messagePage.messageText});
+        //     this._state.messagePage.messageText = "";
+        //     this._rerenderEntire(this._state);
+        // }
+        //////////////////////////////////////////////
+        this._state.messagePage = DialogReducer(this._state.messagePage, action);
+        this._state.profilePage = ProfileReducer(this._state.profilePage, action);
+        this._state.sidebar = SidebarReducer(this._state.sidebar, action);
+        this._rerenderEntire(this._state);
+    } 
+    
 }
+// export const actionCreater = () => {
+//     return {
+//       type: 'ADD-POST'
+//     }
+//   }
+// export const actionUpdater = (text) => {
+//     return {
+//       type: 'CHANGE-POST-TEXT-AREA', 
+//       text: text
+//     }
+//   }
+// export const actionMessageUpdater = (newMessage) => {
+//       return{
+//         type: 'CHANGE-MESSAGE', 
+//         newMessage: newMessage
+//       }
+//   }
+//   export const actionAddMessage = () => {
+//       return {
+//           type: 'ADD-MESSAGE'
+//       }
+//   }
+window.store = store;
 
 
 

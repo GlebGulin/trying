@@ -1,6 +1,18 @@
 import React from 'react';
 import s from'./MyPosts.module.css';
 import Post from './Post/Post';
+import { actionCreater, actionUpdater } from './../../redux/profile-reducer';
+// let actionCreater = () => {
+//   return {
+//     type: 'ADD-POST'
+//   }
+// }
+// let actionUpdater = (text) => {
+//   return {
+//     type: 'CHANGE-POST-TEXT-AREA', 
+//     text: text
+//   }
+// }
 const MyPosts = (props) => {
     
     let postItem = props.dataPost.map(postcontent => 
@@ -11,7 +23,11 @@ const MyPosts = (props) => {
     let addPost = () => {
       // let text=NewPostElement.current.value;
       // props.addPost(text);
-      props.addPost();
+      // props.addPost();
+      debugger;
+      let action = {type: 'ADD-POST'}
+        // props.dispatch(action);
+        props.dispatch(actionCreater());
       // alert(text);
       alert(props.newTextPost);
       // props.changePostTextArea('');
@@ -20,7 +36,10 @@ const MyPosts = (props) => {
     let PostOnChange = () => {
       let text=NewPostElement.current.value;
       console.log(text);
-      props.changePostTextArea(text);
+      // let action = {type:'CHANGE-POST-TEXT-AREA', text: text};
+      // props.dispatch(action);
+      props.dispatch(actionUpdater(text));
+      
 
     }
     return(
